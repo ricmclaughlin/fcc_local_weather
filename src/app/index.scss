@@ -27,6 +27,15 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
+.stylish {
+  font-family: 'Qwigley', cursive;
+  font-size: 25px;
+}
+
+#footer {
+  margin-top: 5px
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
