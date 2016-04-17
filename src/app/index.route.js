@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
       .when('/', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'

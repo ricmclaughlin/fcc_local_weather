@@ -1,10 +1,7 @@
-/* global malarkey:false, moment:false */
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('fccLocalWeather')
-    .constant('malarkey', malarkey)
-    .constant('moment', moment);
-
+    .constant('WEATHER_KEY', 'ced22edda5ab59a89469af8a36ce60af');
 })();

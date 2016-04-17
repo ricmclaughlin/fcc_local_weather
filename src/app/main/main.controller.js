@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,33 +6,42 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController($http, WEATHER_KEY) {
     var vm = this;
-
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1460859715733;
-    vm.showToastr = showToastr;
-
+    vm.tempF = '90';
+    vm.tempC = '90';
+    vm.celsius = false;
+    vm.city = '';
+    vm.country = '';
+    vm.lat = '';
+    vm.long = '';
+    vm.weather = '';
+    vm.weatherData = '';
+    vm.weatherIcon = '';
     activate();
 
     function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
+      getLocation();
+
     }
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
+    function getLocation() {
+      $http.get('http://ip-api.com/json')
+        .success(function (coordinates) {
+          vm.city = coordinates.city;
+          vm.country = coordinates.country;
+          vm.countryCode = coordinates.countryCode;
+          getWeather();
+        });
     }
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
+    function getWeather() {
+      $http.get('http://api.openweathermap.org/data/2.5/weather?&units=metric&q=' + vm.city + ',' + vm.countryCode + '&APPID=' + WEATHER_KEY).success(function (weatherData) {
+        vm.weatherData = weatherData;
+        vm.weatherIcon = 'http://openweathermap.org/img/w/' + weatherData['weather'][0].icon + '.png';
+        vm.weather = weatherData['weather'][0].main;
+        vm.tempC = weatherData['main'].temp;
+        vm.tempF = (vm.tempC * (9 / 5)) + 32;
       });
     }
   }

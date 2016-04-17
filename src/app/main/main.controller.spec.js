@@ -1,39 +1,55 @@
-(function() {
+(function () {
   'use strict';
 
-  describe('controllers', function(){
+  describe('controllers', function () {
     var vm;
-    var $timeout;
-    var toastr;
 
     beforeEach(module('fccLocalWeather'));
-    beforeEach(inject(function(_$controller_, _$timeout_, _webDevTec_, _toastr_) {
-      spyOn(_webDevTec_, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);
-      spyOn(_toastr_, 'info').and.callThrough();
+    beforeEach(inject(function (_$controller_) {
 
       vm = _$controller_('MainController');
-      $timeout = _$timeout_;
-      toastr = _toastr_;
     }));
 
-    it('should have a timestamp creation date', function() {
-      expect(vm.creationDate).toEqual(jasmine.any(Number));
+    it('should have a celsius and temp attribute', function () {
+      expect(vm.celsius).not.toEqual(undefined);
+      expect(vm.tempF).not.toEqual(undefined);
+      expect(vm.tempC).not.toEqual(undefined);
+      expect(vm.city).not.toEqual(undefined);
+      expect(vm.country).not.toEqual(undefined);
+
     });
 
-    it('should define animate class after delaying timeout ', function() {
-      $timeout.flush();
-      expect(vm.classAnimation).toEqual('rubberBand');
-    });
-
-    it('should show a Toastr info and stop animation when invoke showToastr()', function() {
-      vm.showToastr();
-      expect(toastr.info).toHaveBeenCalled();
-      expect(vm.classAnimation).toEqual('');
-    });
-
-    it('should define more than 5 awesome things', function() {
-      expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
-      expect(vm.awesomeThings.length === 5).toBeTruthy();
-    });
   });
 })();
+
+//describe('The Main Controller', () => {
+//  let vm;
+//
+//  beforeEach(angular.mock.module('fccQuoteMachine'));
+//
+//  beforeEach(inject(($controller, quotes) => {
+//    spyOn(quotes, 'getRandomQuote').and.callThrough();
+//    vm = $controller('MainController');
+//  }));
+//  //  it('should be registered', () => {
+//    expect(vm).not.toEqual(null);
+//  });
+//
+//  it('should have a single quote', () => {
+//    expect(vm.quote).toEqual(jasmine.any(Object));
+//  });
+//  //  it('should contain getDisplayQuote', () => {
+//    expect(vm.getDisplayQuote).not.toEqual(null);
+//  });
+//
+//  it('should call quotes.getDisplayQuote()', inject(quotes => {
+//    vm.getDisplayQuote();
+//    expect(quotes.getRandomQuote).toHaveBeenCalled();
+//  }));
+//
+//  it('should have a quoteTweet String', () => {
+//    expect(vm.quoteTweet).toEqual(jasmine.any(String));
+//  });
+//
+//
+//});
