@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('fccLocalWeather')
+    .module('app')
     .config(config);
 
   /** @ngInject */

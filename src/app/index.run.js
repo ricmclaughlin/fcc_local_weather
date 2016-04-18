@@ -1,14 +1,13 @@
-(function() {
+(function () {
   'use strict';
 
   angular
-    .module('fccLocalWeather')
+    .module('app')
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock() {
 
-    $log.debug('runBlock end');
   }
 
 })();
